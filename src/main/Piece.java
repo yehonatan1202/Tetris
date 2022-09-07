@@ -196,22 +196,16 @@ public class Piece {
 
 	void rotateCounterlockwise() {
 		for (int x = 0; x < 4 / 2; x++) {
-			// Consider elements in group
-			// of 4 in current square
 			for (int y = x; y < 4 - x - 1; y++) {
 				// Store current cell in
 				// temp variable
 				int temp = shape[x][y];
-
 				// Move values from right to top
 				shape[x][y] = shape[y][4 - 1 - x];
-
 				// Move values from bottom to right
 				shape[y][4 - 1 - x] = shape[4 - 1 - x][4 - 1 - y];
-
 				// Move values from left to bottom
 				shape[4 - 1 - x][4 - 1 - y] = shape[4 - 1 - y][x];
-
 				// Assign temp to left
 				shape[4 - 1 - y][x] = temp;
 			}
@@ -272,13 +266,14 @@ public class Piece {
 	}
 
 	void update() {
-		posY++;
-		if (downCollision()) {
-			return;
-		}
-		posY--;
+		// posY++;
+		// if (downCollision()) {
+		// return;
+		// }
+		// posY--;
 		if (gp.keyH.downPressed == true) {
 			posY++;
+			downCollision();
 			gp.keyH.downPressed = false;
 		}
 

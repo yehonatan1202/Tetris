@@ -12,7 +12,6 @@ public class Application {
 		GamePanel gamePanel = new GamePanel();
 		gamePanel.startGameThread();
 		window.add(gamePanel);
-
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
