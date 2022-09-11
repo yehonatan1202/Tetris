@@ -15,5 +15,17 @@ public class Application {
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
+
+		JFrame opponentWindow = new JFrame();
+		opponentWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		opponentWindow.setResizable(false);
+		opponentWindow.setTitle("Tanks");
+
+		OpponentGamePanel opponentgamePanel = new OpponentGamePanel();
+		opponentgamePanel.startGameThread();
+		opponentWindow.add(opponentgamePanel);
+		opponentWindow.pack();
+		opponentWindow.setLocationRelativeTo(null);
+		opponentWindow.setVisible(true);
 	}
 }

@@ -21,15 +21,15 @@ public class Piece {
 		switch (rnd) {
 			case 0:
 				tile = 1;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
+				shape[0][0] = 1;
+				shape[0][1] = 1;
+				shape[0][2] = 1;
+				shape[0][3] = 1;
 
-				shape[1][0] = 1;
-				shape[1][1] = 1;
-				shape[1][2] = 1;
-				shape[1][3] = 1;
+				shape[1][0] = 0;
+				shape[1][1] = 0;
+				shape[1][2] = 0;
+				shape[1][3] = 0;
 
 				shape[2][0] = 0;
 				shape[2][1] = 0;
@@ -110,18 +110,18 @@ public class Piece {
 			case 4:
 				tile = 5;
 				shape[0][0] = 0;
-				shape[0][1] = 0;
+				shape[0][1] = 1;
 				shape[0][2] = 0;
 				shape[0][3] = 0;
 
-				shape[1][0] = 0;
+				shape[1][0] = 1;
 				shape[1][1] = 1;
-				shape[1][2] = 0;
+				shape[1][2] = 1;
 				shape[1][3] = 0;
 
-				shape[2][0] = 1;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
+				shape[2][0] = 0;
+				shape[2][1] = 0;
+				shape[2][2] = 0;
 				shape[2][3] = 0;
 
 				shape[3][0] = 0;
