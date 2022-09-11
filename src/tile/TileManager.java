@@ -15,8 +15,8 @@ import main.GamePanel;
 public class TileManager implements Runnable {
 	GamePanel gp;
 	public Tile[] tile;
-	public int mapTileNum[][];
-	public int opponenetMapTileNum[][];
+	public static int mapTileNum[][];
+	public static int opponenetMapTileNum[][];
 	Thread mapThread;
 
 	public TileManager(GamePanel gp) {
@@ -25,6 +25,8 @@ public class TileManager implements Runnable {
 		mapTileNum = new int[gp.ScreenRow][gp.ScreenCol];
 		opponenetMapTileNum = new int[gp.ScreenRow][gp.ScreenCol];
 		getTileImage();
+	}
+	public void startTileManagerThread(){
 		mapThread = new Thread(this);
 		mapThread.start();
 	}
@@ -106,7 +108,6 @@ public class TileManager implements Runnable {
 			}
 			//////////////////////////////////////////////////////////////////////////////////////
 			try {
-				// InputStream is = getClass().getResourceAsStream("res/maps/playerMap.txt");
 				BufferedReader br = new BufferedReader(new FileReader(new File("res/maps/playerMap.txt")));
 				for (int i = 0; i < gp.ScreenRow; i++) {
 					String line = br.readLine();

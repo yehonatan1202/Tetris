@@ -7,7 +7,7 @@ public class Application {
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setTitle("Tanks");
+		window.setTitle("Tetris");
 
 		GamePanel gamePanel = new GamePanel();
 		gamePanel.startGameThread();
@@ -19,7 +19,7 @@ public class Application {
 		JFrame opponentWindow = new JFrame();
 		opponentWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		opponentWindow.setResizable(false);
-		opponentWindow.setTitle("Tanks");
+		opponentWindow.setTitle("Opponent");
 
 		OpponentGamePanel opponentgamePanel = new OpponentGamePanel();
 		opponentgamePanel.startGameThread();

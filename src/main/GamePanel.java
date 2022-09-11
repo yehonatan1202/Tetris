@@ -12,7 +12,7 @@ import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
 	public final int originalTitleSize = 16;
-	public final int scale = 3;
+	public final int scale = 2;
 	public final int tileSize = originalTitleSize * scale;
 	public final int ScreenCol = 10;
 	public final int ScreenRow = 20;
@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// this.addMouseMotionListener(mouseH);
 		// this.addMouseListener(mouseH);
 		this.setFocusable(true);
+		tileM.startTileManagerThread();
 	}
 
 	public void newPiece() {
@@ -85,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHints(rh);
