@@ -1,7 +1,10 @@
 package main;
 
 import javax.swing.JPanel;
-import tile.TileManager;
+
+import file.FileManager;
+import tile.OpponentTileManager;
+import tile.PlayerTileManager;
 
 public class GamePanel extends JPanel {
 	public final int originalTitleSize = 16;
@@ -15,13 +18,30 @@ public class GamePanel extends JPanel {
 	public PlayerPanel playerPanel;
 	public OpponentPanel opponenetPanel;
 	public NextPiecePanel nextPiecePanel;
-	public static TileManager TileManager;
+	public PlayerTileManager playerTileManager;
+	public OpponentTileManager opponentTileManager;
 
 	public KeyHandler keyHandler;
 
 	public GamePanel() {
-		playerPanel = new PlayerPanel(this);
-		opponenetPanel = new OpponentPanel(this);
-		nextPiecePanel = new NextPiecePanel(this);
+		this.playerPanel = new PlayerPanel(this);
+		this.opponenetPanel = new OpponentPanel(this);
+		
+		this.playerTileManager = new PlayerTileManager(this);
+		this.opponentTileManager = new OpponentTileManager(this);
+		
+		this.nextPiecePanel = new NextPiecePanel(this);
+		this.keyHandler = new KeyHandler();
+		playerPanel.addKeyListener(keyHandler);
+		
+		FileManager fileManager = new FileManager(this);
+		
+		add(playerPanel);
+		add(nextPiecePanel);
+		add(opponenetPanel);
+		playerPanel.startGameThread();
+		opponenetPanel.startGameThread();
+		nextPiecePanel.startGameThread();
+		fileManager.startGameThread();
 	}
 }
