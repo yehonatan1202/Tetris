@@ -6,34 +6,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import javax.swing.JPanel;
+import tile.TileManager;
 
-public class OpponentPanel extends JPanel implements Runnable {
-    public final int originalTitleSize = 16;
-    public final int scale = 2;
-    public final int tileSize = originalTitleSize * scale;
-    public final int ScreenCol = 10;
-    public final int ScreenRow = 20;
-    public int screenWidth = tileSize * ScreenCol;
-    public int screenHeight = tileSize * ScreenRow;
+public class OpponentPanel extends PlayerPanel {
+	public TileManager tileM = new TileManager(this);
 
-    int FPS = 60;
+	public OpponentPanel(GamePanel gamePanel) {
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setBackground(Color.black);
+		this.setDoubleBuffered(true);
+		this.setFocusable(true);
+	}
 
-    Thread opponentGameThread;
-    // Time
-    GamePanel gamePanel;
-
-    public OpponentPanel(GamePanel gamePanel){
-    	this.gamePanel = gamePanel;
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
-    }
+	public void gameOver() {
+		System.out.println("lost!");
+	}
 
 	public void startGameThread() {
-		opponentGameThread = new Thread(this);
-		opponentGameThread.start();
+		gameThread = new Thread(this);
+		gameThread.start();
 	}
 
 	@Override
@@ -43,7 +34,7 @@ public class OpponentPanel extends JPanel implements Runnable {
 		long lastTime = System.nanoTime();
 		long currentTime;
 
-		while (opponentGameThread != null) {
+		while (gameThread != null) {
 			currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / drawInterval;
 			lastTime = currentTime;
@@ -64,7 +55,7 @@ public class OpponentPanel extends JPanel implements Runnable {
 		Graphics2D g2 = (Graphics2D) g;
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHints(rh);
-		gamePanel.opponentTileManager.draw(g2);
+		tileM.drawOpponent(g2);
 		g2.dispose();
 	}
 }
