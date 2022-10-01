@@ -21,15 +21,26 @@ public class PlayerPanel extends JPanel implements Runnable {
 
     Thread gameThread;
     // Time
-    int delay = 1000;
-    long startTime = System.currentTimeMillis() % 10000 / delay;
-    long lastTime = startTime;
+    int delay;
+    long startTime;
+    long lastTime;
     GamePanel gamePanel;
-    //Piece currentPiece;
-    
+    // Piece currentPiece;
 
-    public PlayerPanel(GamePanel gamePanel){
-    	this.gamePanel = gamePanel;
+    public int level;
+    public int score;
+    public int numOfLines;
+
+    public PlayerPanel(GamePanel gamePanel, int level) {
+        this.gamePanel = gamePanel;
+        this.level = level;
+        this.score = 0;
+        this.numOfLines = 0;
+
+        delay = 1000 - (16 * level);
+        startTime = System.currentTimeMillis() % 10000 / delay;
+        lastTime = startTime;
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -39,6 +50,11 @@ public class PlayerPanel extends JPanel implements Runnable {
     public void newPiece() {
         lastTime = startTime;
         gamePanel.nextPiecePanel.newPiece();
+    }
+
+    public void levelUp() {
+        level++;
+        delay -= 16;
     }
 
     public void gameOver() {
@@ -73,6 +89,8 @@ public class PlayerPanel extends JPanel implements Runnable {
         if (startTime != lastTime) {
             lastTime = startTime;
             gamePanel.nextPiecePanel.currentPiece.drop();
+            System.out.println("score: " + score);
+            System.out.println("level: " + level);
         }
         gamePanel.nextPiecePanel.currentPiece.update();
         startTime = System.currentTimeMillis() % 10000 / delay;

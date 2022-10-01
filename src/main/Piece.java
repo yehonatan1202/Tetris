@@ -21,10 +21,10 @@ public class Piece {
 		shape = new int[4][4];
 		int rnd = rand.nextInt(7);
 		switch (rnd) {
-			//1 1 1 1
-			//0 0 0 0
-			//0 0 0 0
-			//0 0 0 0
+			// 1 1 1 1
+			// 0 0 0 0
+			// 0 0 0 0
+			// 0 0 0 0
 			case 0:
 				tile = 1;
 				shape[0][0] = 1;
@@ -47,10 +47,10 @@ public class Piece {
 				shape[3][2] = 0;
 				shape[3][3] = 0;
 				break;
-				//0 0 0 0
-				//0 1 1 0
-				//0 1 1 0
-				//0 0 0 0
+			// 0 0 0 0
+			// 0 1 1 0
+			// 0 1 1 0
+			// 0 0 0 0
 			case 1:
 				tile = 2;
 				shape[0][0] = 0;
@@ -73,10 +73,10 @@ public class Piece {
 				shape[3][2] = 0;
 				shape[3][3] = 0;
 				break;
-				//0 0 0 0
-				//1 0 0 0
-				//1 1 1 0
-				//0 0 0 0
+			// 0 0 0 0
+			// 1 0 0 0
+			// 1 1 1 0
+			// 0 0 0 0
 			case 2:
 				tile = 3;
 				shape[0][0] = 0;
@@ -99,10 +99,10 @@ public class Piece {
 				shape[3][2] = 0;
 				shape[3][3] = 0;
 				break;
-				//0 0 0 0
-				//0 0 0 1
-				//0 1 1 1
-				//0 0 0 0
+			// 0 0 0 0
+			// 0 0 0 1
+			// 0 1 1 1
+			// 0 0 0 0
 			case 3:
 				tile = 4;
 				shape[0][0] = 0;
@@ -125,10 +125,10 @@ public class Piece {
 				shape[3][2] = 0;
 				shape[3][3] = 0;
 				break;
-				//0 0 0 0
-				//0 1 0 0
-				//1 1 1 0
-				//0 0 0 0
+			// 0 0 0 0
+			// 0 1 0 0
+			// 1 1 1 0
+			// 0 0 0 0
 			case 4:
 				tile = 5;
 				shape[0][0] = 0;
@@ -250,7 +250,8 @@ public class Piece {
 	boolean downCollision() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (shape[i][j] != 0 && (posY + i > 19 || gamePanel.playerTileManager.playerTilesMap[posY + i][posX + j] != 0)) {
+				if (shape[i][j] != 0
+						&& (posY + i > 19 || gamePanel.playerTileManager.playerTilesMap[posY + i][posX + j] != 0)) {
 					updateMap();
 					gamePanel.playerPanel.newPiece();
 					return true;
@@ -283,6 +284,7 @@ public class Piece {
 			posY++;
 			downCollision();
 			gamePanel.keyHandler.downPressed = false;
+			gamePanel.playerPanel.score++;
 		}
 
 		if (gamePanel.keyHandler.rightPressed == true) {
@@ -314,7 +316,8 @@ public class Piece {
 				if (shape[i][j] != 0) {
 					int screenX = (j + posX) * gamePanel.tileSize;
 					int screenY = (i + posY) * gamePanel.tileSize;
-					g2.drawImage(TileManager.tile[tile].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+					g2.drawImage(TileManager.tile[tile].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
+							null);
 				}
 			}
 		}
