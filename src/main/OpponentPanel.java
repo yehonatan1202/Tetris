@@ -9,27 +9,27 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class OpponentPanel extends JPanel implements Runnable {
-    public final int originalTitleSize = 16;
-    public final int scale = 2;
-    public final int tileSize = originalTitleSize * scale;
-    public final int ScreenCol = 10;
-    public final int ScreenRow = 20;
-    public int screenWidth = tileSize * ScreenCol;
-    public int screenHeight = tileSize * ScreenRow;
+	public final int originalTitleSize = 16;
+	public final int scale = 2;
+	public final int tileSize = originalTitleSize * scale;
+	public final int ScreenCol = 10;
+	public final int ScreenRow = 20;
+	public int screenWidth = tileSize * ScreenCol;
+	public int screenHeight = tileSize * ScreenRow;
 
-    int FPS = 60;
+	int FPS = 60;
 
-    Thread opponentGameThread;
-    // Time
-    GamePanel gamePanel;
+	Thread opponentGameThread;
+	// Time
+	GamePanel gamePanel;
 
-    public OpponentPanel(GamePanel gamePanel){
-    	this.gamePanel = gamePanel;
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
-    }
+	public OpponentPanel(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setBackground(Color.black);
+		this.setDoubleBuffered(true);
+		this.setFocusable(true);
+	}
 
 	public void startGameThread() {
 		opponentGameThread = new Thread(this);

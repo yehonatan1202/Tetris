@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import file.FileManager;
 import tile.OpponentTileManager;
 import tile.PlayerTileManager;
-
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -66,4 +65,5 @@ public class GamePanel extends JPanel {
 		nextPiecePanel.startGameThread();
 		fileManager.startGameThread();
 	}
+
 }
