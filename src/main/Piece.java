@@ -1,16 +1,31 @@
 package main;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.Random;
 
 import tile.TileManager;
 
-public class Piece {
-	GamePanel gamePanel;
-	int posX, posY;
-	int[][] shape;
-	int tile;
+public class Piece implements Serializable {
+	transient GamePanel gamePanel;
+	public int posX, posY;
+	public int[][] shape;
+	public int tile;
 	int time = 0;
+
+	public Piece(Piece piece) {
+		this.gamePanel = piece.gamePanel;
+		this.posX = piece.posX;
+		this.posY = piece.posY;
+		this.shape = new int[4][4];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; i++) {
+				this.shape[i][j] = piece.shape[i][j];
+			}
+		}
+		this.tile = piece.tile;
+		this.time = piece.time;
+	}
 
 	public Piece(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -21,21 +36,21 @@ public class Piece {
 		shape = new int[4][4];
 		int rnd = rand.nextInt(7);
 		switch (rnd) {
-			// 1 1 1 1
 			// 0 0 0 0
+			// 1 1 1 1
 			// 0 0 0 0
 			// 0 0 0 0
 			case 0:
 				tile = 1;
-				shape[0][0] = 1;
-				shape[0][1] = 1;
-				shape[0][2] = 1;
-				shape[0][3] = 1;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-				shape[1][0] = 0;
-				shape[1][1] = 0;
-				shape[1][2] = 0;
-				shape[1][3] = 0;
+				shape[1][0] = 1;
+				shape[1][1] = 1;
+				shape[1][2] = 1;
+				shape[1][3] = 1;
 
 				shape[2][0] = 0;
 				shape[2][1] = 0;

@@ -82,6 +82,12 @@ public class PlayerPanel extends JPanel implements Runnable {
                 repaint();
                 delta--;
             }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 

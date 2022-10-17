@@ -2,14 +2,16 @@ package main;
 
 import javax.swing.JPanel;
 
-import file.FileManager;
+import file.Client;
+import file.Server;
 import tile.OpponentTileManager;
 import tile.PlayerTileManager;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.Serializable;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Serializable {
 	public final int originalTitleSize = 16;
 	public final int scale = 2;
 	public final int tileSize = originalTitleSize * scale;
@@ -23,10 +25,41 @@ public class GamePanel extends JPanel {
 	public NextPiecePanel nextPiecePanel;
 	public PlayerTileManager playerTileManager;
 	public OpponentTileManager opponentTileManager;
-
 	public KeyHandler keyHandler;
 
+	public Server server;
+	public Client client;
+
 	public GamePanel() {
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.playerPanel = new PlayerPanel(this, 0);
+
+		this.playerTileManager = new PlayerTileManager(this);
+
+		this.nextPiecePanel = new NextPiecePanel(this);
+		this.keyHandler = new KeyHandler();
+		playerPanel.addKeyListener(keyHandler);
+
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 2;
+		add(playerPanel, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		add(nextPiecePanel, gbc);
+
+		playerPanel.startGameThread();
+		nextPiecePanel.startGameThread();
+		// fileManager.startGameThread();
+	}
+
+	public GamePanel(int numOfPlayers) {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.playerPanel = new PlayerPanel(this, 0);
 		this.opponenetPanel = new OpponentPanel(this);
@@ -37,8 +70,6 @@ public class GamePanel extends JPanel {
 		this.nextPiecePanel = new NextPiecePanel(this);
 		this.keyHandler = new KeyHandler();
 		playerPanel.addKeyListener(keyHandler);
-
-		FileManager fileManager = new FileManager(this);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -63,7 +94,6 @@ public class GamePanel extends JPanel {
 		playerPanel.startGameThread();
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
-		fileManager.startGameThread();
+		// fileManager.startGameThread();
 	}
-
 }

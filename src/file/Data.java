@@ -14,7 +14,7 @@ public class Data implements Serializable {
 		playerTilesMap = new int[gamePanel.playerTileManager.playerTilesMap.length][gamePanel.playerTileManager.playerTilesMap[0].length];
 	}
 
-	public void upload() {s
+	public void upload() {
 		for (int i = 0; i < gamePanel.playerPanel.ScreenRow; i++) {
 			for (int j = 0; j < gamePanel.playerPanel.ScreenCol; j++) {
 				playerTilesMap[i][j] = gamePanel.playerTileManager.playerTilesMap[i][j];

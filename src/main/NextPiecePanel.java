@@ -20,7 +20,7 @@ public class NextPiecePanel extends JPanel implements Runnable {
     public int screenHeight = tileSize * ScreenRow;
 
     GamePanel gamePanel;
-    Piece currentPiece;
+    public Piece currentPiece;
     Piece nextPiece;
 
     int FPS = 60;
@@ -56,6 +56,12 @@ public class NextPiecePanel extends JPanel implements Runnable {
                 // update();
                 repaint();
                 delta--;
+            }
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
     }
