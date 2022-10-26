@@ -95,8 +95,8 @@ public class PlayerPanel extends JPanel implements Runnable {
         if (startTime != lastTime) {
             lastTime = startTime;
             gamePanel.nextPiecePanel.currentPiece.drop();
-            System.out.println("score: " + score);
-            System.out.println("level: " + level);
+            // System.out.println("score: " + score);
+            // System.out.println("level: " + level);
         }
         gamePanel.nextPiecePanel.currentPiece.update();
         startTime = System.currentTimeMillis() % 10000 / delay;

@@ -50,10 +50,6 @@ public class Client implements Runnable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        while (true) {
-            send();
-            recive();
-        }
     }
 
     public void recive() {

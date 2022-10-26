@@ -27,10 +27,23 @@ public class GamePanel extends JPanel implements Serializable {
 	public OpponentTileManager opponentTileManager;
 	public KeyHandler keyHandler;
 
-	public Server server;
-	public Client client;
+	public GamePanel(int mode) {
+		switch (mode) {
+			case 0:
+				solo();
+				break;
 
-	public GamePanel() {
+			case 1:
+				server();
+				break;
+
+			case 2:
+				client();
+				break;
+		}
+	}
+
+	void solo() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.playerPanel = new PlayerPanel(this, 0);
 
@@ -56,10 +69,12 @@ public class GamePanel extends JPanel implements Serializable {
 
 		playerPanel.startGameThread();
 		nextPiecePanel.startGameThread();
-		// fileManager.startGameThread();
 	}
 
-	public GamePanel(int numOfPlayers) {
+	void server() {
+		Server server = new Server(this);
+		server.connect();
+
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.playerPanel = new PlayerPanel(this, 0);
 		this.opponenetPanel = new OpponentPanel(this);
@@ -94,6 +109,47 @@ public class GamePanel extends JPanel implements Serializable {
 		playerPanel.startGameThread();
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
-		// fileManager.startGameThread();
+		server.startServerThread();
+	}
+
+	void client() {
+		Client client = new Client(this);
+		client.connect();
+
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.playerPanel = new PlayerPanel(this, 0);
+		this.opponenetPanel = new OpponentPanel(this);
+
+		this.playerTileManager = new PlayerTileManager(this);
+		this.opponentTileManager = new OpponentTileManager(this);
+
+		this.nextPiecePanel = new NextPiecePanel(this);
+		this.keyHandler = new KeyHandler();
+		playerPanel.addKeyListener(keyHandler);
+
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 2;
+		add(playerPanel, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		add(nextPiecePanel, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 2;
+		add(opponenetPanel, gbc);
+
+		playerPanel.startGameThread();
+		opponenetPanel.startGameThread();
+		nextPiecePanel.startGameThread();
+		client.startClientThread();
 	}
 }

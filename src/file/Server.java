@@ -24,14 +24,14 @@ public class Server implements Runnable {
 
     public void run() {
         while (serverThread != null) {
-            recive();
+            send();
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            send();
+            recive();
         }
     }
 

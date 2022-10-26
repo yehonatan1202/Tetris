@@ -11,7 +11,7 @@ public class Data implements Serializable {
 
 	public Data(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
-		playerTilesMap = new int[gamePanel.playerTileManager.playerTilesMap.length][gamePanel.playerTileManager.playerTilesMap[0].length];
+		playerTilesMap = new int[20][10];
 	}
 
 	public void upload() {
