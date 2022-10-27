@@ -65,11 +65,13 @@ public class Server implements Runnable {
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                end();
             }
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            end();
         }
     }
 

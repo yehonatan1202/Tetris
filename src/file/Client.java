@@ -64,10 +64,12 @@ public class Client implements Runnable {
                 recivedData.download(gamePanel);
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
+                end();
                 e.printStackTrace();
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            end();
             e.printStackTrace();
         }
     }

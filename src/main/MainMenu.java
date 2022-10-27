@@ -3,19 +3,15 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import file.Client;
-import file.Server;
-
 import java.awt.GridBagLayout;
 import java.awt.Color;
 
 public class MainMenu {
-    public MainMenu() {
+    public void start() {
         String[] options = { "Solo", "Create", "Join" };
         int mode = JOptionPane.showOptionDialog(null, "Select:",
                 "Tetris",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
         JFrame window;
         GamePanel gamePanel;
         window = new JFrame();
@@ -29,7 +25,5 @@ public class MainMenu {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
     }
-
 }

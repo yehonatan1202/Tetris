@@ -59,6 +59,7 @@ public class PlayerPanel extends JPanel implements Runnable {
 
     public void gameOver() {
         System.out.println("lost!");
+        gameThread = null;
     }
 
     public void startGameThread() {

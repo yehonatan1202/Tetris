@@ -9,9 +9,8 @@ import tile.PlayerTileManager;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.Serializable;
 
-public class GamePanel extends JPanel implements Serializable {
+public class GamePanel extends JPanel {
 	public final int originalTitleSize = 16;
 	public final int scale = 2;
 	public final int tileSize = originalTitleSize * scale;
