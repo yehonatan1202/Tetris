@@ -2,11 +2,25 @@ package main;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
-public class MainMenu {
+public class MainMenu extends JPanel {
+
+    public MainMenu() {
+        this.setPreferredSize(new Dimension(832, 704));
+        this.setBackground(Color.black);
+        this.setDoubleBuffered(true);
+        this.setFocusable(true);
+        repaint();
+    }
+
     public void start() {
         String[] options = { "Solo", "Create", "Join" };
         int mode = JOptionPane.showOptionDialog(null, "Select:",
@@ -25,5 +39,15 @@ public class MainMenu {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    public void paintComponent(Graphics g) {
+        // super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHints(rh);
+
+        g2.dispose();
+
     }
 }
