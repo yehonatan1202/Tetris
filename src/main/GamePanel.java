@@ -1,14 +1,15 @@
 package main;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JPanel;
 
 import file.Client;
 import file.Server;
 import tile.OpponentTileManager;
 import tile.PlayerTileManager;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
 public class GamePanel extends JPanel {
 	public final int originalTitleSize = 16;
@@ -59,13 +60,11 @@ public class GamePanel extends JPanel {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 2;
 		add(playerPanel, gbc);
-
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		add(nextPiecePanel, gbc);
-
 		playerPanel.startGameThread();
 		nextPiecePanel.startGameThread();
 	}
