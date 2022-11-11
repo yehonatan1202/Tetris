@@ -25,11 +25,11 @@ public class NextPiecePanel extends JPanel implements Runnable {
 
 	int FPS = 60;
 
-	Thread NextPieceThread;
+	Thread nextPieceThread;
 
 	public NextPiecePanel(GamePanel gamePanel) {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
+		this.setBackground(Color.BLACK);
 		this.setDoubleBuffered(true);
 		this.gamePanel = gamePanel;
 		this.currentPiece = new Piece(gamePanel);
@@ -37,8 +37,8 @@ public class NextPiecePanel extends JPanel implements Runnable {
 	}
 
 	public void startGameThread() {
-		NextPieceThread = new Thread(this);
-		NextPieceThread.start();
+		nextPieceThread = new Thread(this);
+		nextPieceThread.start();
 	}
 
 	public void run() {
@@ -47,7 +47,7 @@ public class NextPiecePanel extends JPanel implements Runnable {
 		long lastTime = System.nanoTime();
 		long currentTime;
 
-		while (NextPieceThread != null) {
+		while (nextPieceThread != null) {
 			currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / drawInterval;
 			lastTime = currentTime;

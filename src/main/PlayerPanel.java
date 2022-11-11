@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class PlayerPanel extends JPanel implements Runnable {
 	public final int originalTitleSize = 16;
@@ -27,17 +29,10 @@ public class PlayerPanel extends JPanel implements Runnable {
 	GamePanel gamePanel;
 	// Piece currentPiece;
 
-	public int level;
-	public int score;
-	public int numOfLines;
-
-	public PlayerPanel(GamePanel gamePanel, int level) {
+	public PlayerPanel(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
-		this.level = level;
-		this.score = 0;
-		this.numOfLines = 0;
 
-		delay = 1000 - (16 * level);
+		delay = 1000 - (16 * gamePanel.statsPanel.level);
 		startTime = System.currentTimeMillis() % 10000 / delay;
 		lastTime = startTime;
 
@@ -51,12 +46,9 @@ public class PlayerPanel extends JPanel implements Runnable {
 		gamePanel.nextPiecePanel.newPiece();
 	}
 
-	public void levelUp() {
-		level++;
-		delay -= 16;
-	}
-
 	public void gameOver() {
+		JFrame window = (JFrame) (SwingUtilities.getWindowAncestor(gamePanel));
+		MainMenu mainMenu = new MainMenu(window);
 		System.out.println("lost!");
 		gameThread = null;
 	}
@@ -85,7 +77,6 @@ public class PlayerPanel extends JPanel implements Runnable {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

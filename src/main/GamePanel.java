@@ -21,6 +21,7 @@ public class GamePanel extends JPanel {
 	public int screenHeight = tileSize * ScreenRow;
 
 	public PlayerPanel playerPanel;
+	public StatsPanel statsPanel;
 	public OpponentPanel opponenetPanel;
 	public NextPiecePanel nextPiecePanel;
 	public PlayerTileManager playerTileManager;
@@ -45,7 +46,8 @@ public class GamePanel extends JPanel {
 
 	void solo() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.playerPanel = new PlayerPanel(this, 0);
+		statsPanel = new StatsPanel(this);
+		this.playerPanel = new PlayerPanel(this);
 
 		this.playerTileManager = new PlayerTileManager(this);
 
@@ -65,8 +67,15 @@ public class GamePanel extends JPanel {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		add(nextPiecePanel, gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		add(statsPanel, gbc);
+
 		playerPanel.startGameThread();
 		nextPiecePanel.startGameThread();
+		statsPanel.startGameThread();
 	}
 
 	void server() {
@@ -74,7 +83,7 @@ public class GamePanel extends JPanel {
 		server.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.playerPanel = new PlayerPanel(this, 0);
+		this.playerPanel = new PlayerPanel(this);
 		this.opponenetPanel = new OpponentPanel(this);
 
 		this.playerTileManager = new PlayerTileManager(this);
@@ -115,7 +124,7 @@ public class GamePanel extends JPanel {
 		client.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.playerPanel = new PlayerPanel(this, 0);
+		this.playerPanel = new PlayerPanel(this);
 		this.opponenetPanel = new OpponentPanel(this);
 
 		this.playerTileManager = new PlayerTileManager(this);

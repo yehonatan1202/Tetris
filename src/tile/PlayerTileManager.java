@@ -34,10 +34,10 @@ public class PlayerTileManager extends TileManager {
 				numOfRaws++;
 			}
 		}
-		playerPanel.score += linesPoints[numOfRaws] * (playerPanel.level + 1);
-		playerPanel.numOfLines += numOfRaws;
-		if (playerPanel.numOfLines - playerPanel.level * 10 >= 10) {
-			playerPanel.levelUp();
+		gamePanel.statsPanel.score += linesPoints[numOfRaws] * (gamePanel.statsPanel.level + 1);
+		gamePanel.statsPanel.numOfLines += numOfRaws;
+		if (gamePanel.statsPanel.numOfLines - gamePanel.statsPanel.level * 10 >= 10) {
+			gamePanel.statsPanel.levelUp();
 		}
 	}
 

@@ -19,7 +19,7 @@ public class Piece implements Serializable {
 		this.posY = piece.posY;
 		this.shape = new int[4][4];
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; i++) {
+			for (int j = 0; j < 4; j++) {
 				this.shape[i][j] = piece.shape[i][j];
 			}
 		}
@@ -36,180 +36,180 @@ public class Piece implements Serializable {
 		shape = new int[4][4];
 		int rnd = rand.nextInt(7);
 		switch (rnd) {
-		// 0 0 0 0
-		// 1 1 1 1
-		// 0 0 0 0
-		// 0 0 0 0
-		case 0:
-			tile = 1;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+			// 0 0 0 0
+			// 1 1 1 1
+			// 0 0 0 0
+			// 0 0 0 0
+			case 0:
+				tile = 1;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 1;
-			shape[1][1] = 1;
-			shape[1][2] = 1;
-			shape[1][3] = 1;
+				shape[1][0] = 1;
+				shape[1][1] = 1;
+				shape[1][2] = 1;
+				shape[1][3] = 1;
 
-			shape[2][0] = 0;
-			shape[2][1] = 0;
-			shape[2][2] = 0;
-			shape[2][3] = 0;
+				shape[2][0] = 0;
+				shape[2][1] = 0;
+				shape[2][2] = 0;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		// 0 0 0 0
-		// 0 1 1 0
-		// 0 1 1 0
-		// 0 0 0 0
-		case 1:
-			tile = 2;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			// 0 0 0 0
+			// 0 1 1 0
+			// 0 1 1 0
+			// 0 0 0 0
+			case 1:
+				tile = 2;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 0;
-			shape[1][1] = 1;
-			shape[1][2] = 1;
-			shape[1][3] = 0;
+				shape[1][0] = 0;
+				shape[1][1] = 1;
+				shape[1][2] = 1;
+				shape[1][3] = 0;
 
-			shape[2][0] = 0;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 0;
+				shape[2][0] = 0;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		// 0 0 0 0
-		// 1 0 0 0
-		// 1 1 1 0
-		// 0 0 0 0
-		case 2:
-			tile = 3;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			// 0 0 0 0
+			// 1 0 0 0
+			// 1 1 1 0
+			// 0 0 0 0
+			case 2:
+				tile = 3;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 1;
-			shape[1][1] = 0;
-			shape[1][2] = 0;
-			shape[1][3] = 0;
+				shape[1][0] = 1;
+				shape[1][1] = 0;
+				shape[1][2] = 0;
+				shape[1][3] = 0;
 
-			shape[2][0] = 1;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 0;
+				shape[2][0] = 1;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		// 0 0 0 0
-		// 0 0 0 1
-		// 0 1 1 1
-		// 0 0 0 0
-		case 3:
-			tile = 4;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			// 0 0 0 0
+			// 0 0 0 1
+			// 0 1 1 1
+			// 0 0 0 0
+			case 3:
+				tile = 4;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 0;
-			shape[1][1] = 0;
-			shape[1][2] = 0;
-			shape[1][3] = 1;
+				shape[1][0] = 0;
+				shape[1][1] = 0;
+				shape[1][2] = 0;
+				shape[1][3] = 1;
 
-			shape[2][0] = 0;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 1;
+				shape[2][0] = 0;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 1;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		// 0 0 0 0
-		// 0 1 0 0
-		// 1 1 1 0
-		// 0 0 0 0
-		case 4:
-			tile = 5;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			// 0 0 0 0
+			// 0 1 0 0
+			// 1 1 1 0
+			// 0 0 0 0
+			case 4:
+				tile = 5;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 0;
-			shape[1][1] = 1;
-			shape[1][2] = 0;
-			shape[1][3] = 0;
+				shape[1][0] = 0;
+				shape[1][1] = 1;
+				shape[1][2] = 0;
+				shape[1][3] = 0;
 
-			shape[2][0] = 1;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 0;
+				shape[2][0] = 1;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		case 5:
-			tile = 6;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			case 5:
+				tile = 6;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 0;
-			shape[1][1] = 0;
-			shape[1][2] = 1;
-			shape[1][3] = 1;
+				shape[1][0] = 0;
+				shape[1][1] = 0;
+				shape[1][2] = 1;
+				shape[1][3] = 1;
 
-			shape[2][0] = 0;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 0;
+				shape[2][0] = 0;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
-		case 6:
-			tile = 7;
-			shape[0][0] = 0;
-			shape[0][1] = 0;
-			shape[0][2] = 0;
-			shape[0][3] = 0;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
+			case 6:
+				tile = 7;
+				shape[0][0] = 0;
+				shape[0][1] = 0;
+				shape[0][2] = 0;
+				shape[0][3] = 0;
 
-			shape[1][0] = 1;
-			shape[1][1] = 1;
-			shape[1][2] = 0;
-			shape[1][3] = 0;
+				shape[1][0] = 1;
+				shape[1][1] = 1;
+				shape[1][2] = 0;
+				shape[1][3] = 0;
 
-			shape[2][0] = 0;
-			shape[2][1] = 1;
-			shape[2][2] = 1;
-			shape[2][3] = 0;
+				shape[2][0] = 0;
+				shape[2][1] = 1;
+				shape[2][2] = 1;
+				shape[2][3] = 0;
 
-			shape[3][0] = 0;
-			shape[3][1] = 0;
-			shape[3][2] = 0;
-			shape[3][3] = 0;
-			break;
+				shape[3][0] = 0;
+				shape[3][1] = 0;
+				shape[3][2] = 0;
+				shape[3][3] = 0;
+				break;
 		}
 		if (checkLost() == true) {
 			this.gamePanel.playerPanel.gameOver();
@@ -253,7 +253,7 @@ public class Piece implements Serializable {
 	boolean edgeCollision() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (shape[i][j] == 1 && (posX + j < 0 || posX + j > 9 || posY + i > 19
+				if (shape[i][j] != 0 && (posX + j < 0 || posX + j > 9 || posY + i > 19
 						|| gamePanel.playerTileManager.playerTilesMap[posY + i][posX + j] != 0)) {
 					return true;
 				}
@@ -299,7 +299,7 @@ public class Piece implements Serializable {
 			posY++;
 			downCollision();
 			gamePanel.keyHandler.downPressed = false;
-			gamePanel.playerPanel.score++;
+			gamePanel.statsPanel.score++;
 		}
 
 		if (gamePanel.keyHandler.rightPressed == true) {

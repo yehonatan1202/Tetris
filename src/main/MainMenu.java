@@ -20,19 +20,24 @@ import javax.swing.JPanel;
 
 public class MainMenu extends JPanel implements ActionListener {
 	JFrame window;
-	JPanel panel;
 
 	JButton soloButton;
 	JButton hostButton;
 	JButton joinButton;
 
-	public MainMenu() {
-		window = new JFrame("Main Menu");
-		window.setSize(new Dimension(832, 704));
-		window.setResizable(false);
-		window.setLocationRelativeTo(null);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new JPanel();
+	public MainMenu(JFrame frame) {
+		if (frame == null) {
+			window = new JFrame("Main Menu");
+			window.setSize(new Dimension(832, 704));
+			window.setLocationRelativeTo(null);
+			window.setResizable(false);
+			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		} else {
+			window = frame;
+			window.getContentPane().removeAll();
+			window.setTitle("Main Menu");
+		}
+		JPanel panel = new JPanel();
 		try {
 			// load images
 			BufferedImage Background = ImageIO.read(new File("res/Menu/background.png"));
@@ -58,6 +63,14 @@ public class MainMenu extends JPanel implements ActionListener {
 			soloButton.setPreferredSize(new Dimension(285, 71));
 			hostButton.setPreferredSize(new Dimension(285, 71));
 			joinButton.setPreferredSize(new Dimension(285, 71));
+
+			// set buttons transparent and remove outline
+			soloButton.setContentAreaFilled(false);
+			soloButton.setBorderPainted(false);
+			hostButton.setContentAreaFilled(false);
+			hostButton.setBorderPainted(false);
+			joinButton.setContentAreaFilled(false);
+			joinButton.setBorderPainted(false);
 
 			// set buttons listener
 			soloButton.setActionCommand("solo");
