@@ -299,7 +299,7 @@ public class Piece implements Serializable {
 			posY++;
 			downCollision();
 			gamePanel.keyHandler.downPressed = false;
-			gamePanel.statsPanel.score++;
+			// gamePanel.statsPanel.score++;
 		}
 
 		if (gamePanel.keyHandler.rightPressed == true) {
@@ -322,6 +322,13 @@ public class Piece implements Serializable {
 			if (edgeCollision() == true || downCollision() == true) {
 				rotateCounterlockwise();
 			}
+		}
+		if (gamePanel.keyHandler.spacePressed == true) {
+			while (downCollision() == false) {
+				posY++;
+				gamePanel.statsPanel.score++;
+			}
+			gamePanel.keyHandler.spacePressed = false;
 		}
 	}
 

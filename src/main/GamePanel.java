@@ -83,6 +83,7 @@ public class GamePanel extends JPanel {
 		server.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		statsPanel = new StatsPanel(this);
 		this.playerPanel = new PlayerPanel(this);
 		this.opponenetPanel = new OpponentPanel(this);
 
@@ -100,6 +101,12 @@ public class GamePanel extends JPanel {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 2;
 		add(playerPanel, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		add(statsPanel, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 1;
@@ -117,6 +124,7 @@ public class GamePanel extends JPanel {
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
 		server.startServerThread();
+		statsPanel.startGameThread();
 	}
 
 	void client() {
@@ -124,6 +132,7 @@ public class GamePanel extends JPanel {
 		client.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		statsPanel = new StatsPanel(this);
 		this.playerPanel = new PlayerPanel(this);
 		this.opponenetPanel = new OpponentPanel(this);
 
@@ -148,6 +157,12 @@ public class GamePanel extends JPanel {
 		gbc.gridheight = 1;
 		add(nextPiecePanel, gbc);
 
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		add(statsPanel, gbc);
+
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
@@ -158,5 +173,6 @@ public class GamePanel extends JPanel {
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
 		client.startClientThread();
+		statsPanel.startGameThread();
 	}
 }
