@@ -97,9 +97,14 @@ public class StatsPanel extends JPanel implements Runnable {
         g2.setFont(font);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
         g2.setColor(Color.white);
+
         g2.drawString("Level: " + Integer.toString(level), 0, screenHeight / 2);
         g2.drawString("Score: " + Integer.toString(score), 0, (screenHeight / 2) + 20);
 
+        if (gamePanel.isSolo == false) {
+            g2.drawString("my: " + String.valueOf(gamePanel.myRunning), 0, screenHeight / 2 + 40);
+            g2.drawString("game: " + String.valueOf(gamePanel.gameRunning), 0, (screenHeight / 2) + 60);
+        }
         g2.dispose();
     }
 }

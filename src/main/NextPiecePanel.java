@@ -21,6 +21,7 @@ public class NextPiecePanel extends JPanel implements Runnable {
 
 	GamePanel gamePanel;
 	public Piece currentPiece;
+	public Piece shadowPiece;
 	Piece nextPiece;
 
 	int FPS = 60;
@@ -33,6 +34,7 @@ public class NextPiecePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.gamePanel = gamePanel;
 		this.currentPiece = new Piece(gamePanel);
+		this.shadowPiece = new Piece(currentPiece);
 		this.nextPiece = new Piece(gamePanel);
 	}
 
@@ -48,13 +50,15 @@ public class NextPiecePanel extends JPanel implements Runnable {
 		long currentTime;
 
 		while (nextPieceThread != null) {
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime) / drawInterval;
-			lastTime = currentTime;
-			if (delta >= 1) {
-				// update();
-				repaint();
-				delta--;
+			if (gamePanel.gameRunning == true) {
+				currentTime = System.nanoTime();
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+				if (delta >= 1) {
+					// update();
+					repaint();
+					delta--;
+				}
 			}
 			try {
 				Thread.sleep(20);
@@ -67,6 +71,8 @@ public class NextPiecePanel extends JPanel implements Runnable {
 
 	public void newPiece() {
 		currentPiece = nextPiece;
+		shadowPiece = new Piece(currentPiece);
+		shadowPiece.shadowUpdate();
 		nextPiece = new Piece(gamePanel);
 	}
 
@@ -96,7 +102,7 @@ public class NextPiecePanel extends JPanel implements Runnable {
 				int screenX = (int) ((offsetX + j) * gamePanel.tileSize);
 				int screenY = (int) ((offsetY + i) * gamePanel.tileSize);
 				if (nextPiece.shape[i][j] != 0) {
-					g2.drawImage(TileManager.tile[nextPiece.tile].image, screenX, screenY, gamePanel.tileSize,
+					g2.drawImage(TileManager.tile[nextPiece.tile].image.getImage(), screenX, screenY, gamePanel.tileSize,
 							gamePanel.tileSize, null);
 				}
 			}

@@ -54,7 +54,7 @@ public class PlayerTileManager extends TileManager {
 			for (int j = 0; j < playerPanel.ScreenCol; j++) {
 				int screenX = j * gamePanel.tileSize;
 				int screenY = i * gamePanel.tileSize;
-				g2.drawImage(tile[playerTilesMap[i][j]].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
+				g2.drawImage(tile[playerTilesMap[i][j]].image.getImage(), screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
 						null);
 			}
 		}

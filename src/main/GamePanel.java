@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import file.Client;
 import file.Server;
+import file.ClientServer;
 import tile.OpponentTileManager;
 import tile.PlayerTileManager;
 
@@ -20,6 +21,10 @@ public class GamePanel extends JPanel {
 	public int screenWidth = tileSize * ScreenCol;
 	public int screenHeight = tileSize * ScreenRow;
 
+	public boolean isSolo = false;
+	public boolean myRunning = true;
+	public boolean gameRunning = true;
+
 	public PlayerPanel playerPanel;
 	public StatsPanel statsPanel;
 	public OpponentPanel opponenetPanel;
@@ -27,10 +32,18 @@ public class GamePanel extends JPanel {
 	public PlayerTileManager playerTileManager;
 	public OpponentTileManager opponentTileManager;
 	public KeyHandler keyHandler;
+	public ClientServer clientSever;
+
+	public void resumeGame() {
+		playerPanel.startGameThread();
+		nextPiecePanel.startGameThread();
+		statsPanel.startGameThread();
+	}
 
 	public GamePanel(int mode) {
 		switch (mode) {
 			case 0:
+				isSolo = true;
 				solo();
 				break;
 
@@ -73,14 +86,12 @@ public class GamePanel extends JPanel {
 		gbc.gridheight = 1;
 		add(statsPanel, gbc);
 
-		playerPanel.startGameThread();
-		nextPiecePanel.startGameThread();
-		statsPanel.startGameThread();
+		resumeGame();
 	}
 
 	void server() {
-		Server server = new Server(this);
-		server.connect();
+		clientSever = new Server(this);
+		clientSever.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		statsPanel = new StatsPanel(this);
@@ -123,13 +134,13 @@ public class GamePanel extends JPanel {
 		playerPanel.startGameThread();
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
-		server.startServerThread();
+		clientSever.startThread();
 		statsPanel.startGameThread();
 	}
 
 	void client() {
-		Client client = new Client(this);
-		client.connect();
+		clientSever = new Client(this);
+		clientSever.connect();
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		statsPanel = new StatsPanel(this);
@@ -172,7 +183,7 @@ public class GamePanel extends JPanel {
 		playerPanel.startGameThread();
 		opponenetPanel.startGameThread();
 		nextPiecePanel.startGameThread();
-		client.startClientThread();
+		clientSever.startThread();
 		statsPanel.startGameThread();
 	}
 }

@@ -10,13 +10,13 @@ import java.net.UnknownHostException;
 
 import main.GamePanel;
 
-public class Client implements Runnable {
+public class Client implements Runnable, ClientServer {
     GamePanel gamePanel;
     Data data;
     Socket socket;
     Thread clientThread;
 
-    public void startClientThread() {
+    public void startThread() {
         clientThread = new Thread(this);
         clientThread.start();
     }
@@ -93,6 +93,7 @@ public class Client implements Runnable {
         try {
             System.out.println("Closing socket and terminating program.");
             socket.close();
+            clientThread = null;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

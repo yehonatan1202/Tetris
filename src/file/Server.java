@@ -10,14 +10,14 @@ import java.net.Socket;
 
 import main.GamePanel;
 
-public class Server implements Runnable {
+public class Server implements Runnable, ClientServer {
     GamePanel gamePanel;
     Data data;
     ServerSocket ss;
     Socket socket;
     Thread serverThread;
 
-    public void startServerThread() {
+    public void startThread() {
         serverThread = new Thread(this);
         serverThread.start();
     }
@@ -96,6 +96,7 @@ public class Server implements Runnable {
             System.out.println("Closing sockets.");
             ss.close();
             socket.close();
+            serverThread = null;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

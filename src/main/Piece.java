@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+
 import tile.TileManager;
 
 public class Piece implements Serializable {
@@ -23,7 +25,7 @@ public class Piece implements Serializable {
 				this.shape[i][j] = piece.shape[i][j];
 			}
 		}
-		this.tile = piece.tile;
+		this.tile = piece.tile + 9;
 		this.time = piece.time;
 	}
 
@@ -267,8 +269,6 @@ public class Piece implements Serializable {
 			for (int j = 0; j < 4; j++) {
 				if (shape[i][j] != 0
 						&& (posY + i > 19 || gamePanel.playerTileManager.playerTilesMap[posY + i][posX + j] != 0)) {
-					updateMap();
-					gamePanel.playerPanel.newPiece();
 					return true;
 				}
 			}
@@ -290,14 +290,26 @@ public class Piece implements Serializable {
 	void drop() {
 		posY++;
 		if (downCollision() == true) {
+			updateMap();
+			gamePanel.playerPanel.newPiece();
 			return;
 		}
+	}
+
+	void shadowUpdate() {
+		while (downCollision() == false) {
+			posY++;
+		}
+		posY--;
 	}
 
 	void update() {
 		if (gamePanel.keyHandler.downPressed == true) {
 			posY++;
-			downCollision();
+			if (downCollision() == true) {
+				updateMap();
+				gamePanel.playerPanel.newPiece();
+			}
 			gamePanel.keyHandler.downPressed = false;
 			// gamePanel.statsPanel.score++;
 		}
@@ -328,6 +340,8 @@ public class Piece implements Serializable {
 				posY++;
 				gamePanel.statsPanel.score++;
 			}
+			updateMap();
+			gamePanel.playerPanel.newPiece();
 			gamePanel.keyHandler.spacePressed = false;
 		}
 	}
@@ -338,7 +352,7 @@ public class Piece implements Serializable {
 				if (shape[i][j] != 0) {
 					int screenX = (j + posX) * gamePanel.tileSize;
 					int screenY = (i + posY) * gamePanel.tileSize;
-					g2.drawImage(TileManager.tile[tile].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
+					g2.drawImage(TileManager.tile[tile].image.getImage(), screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
 							null);
 				}
 			}

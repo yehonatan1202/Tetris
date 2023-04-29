@@ -66,13 +66,15 @@ public class PlayerPanel extends JPanel implements Runnable {
 		long currentTime;
 
 		while (gameThread != null) {
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime) / drawInterval;
-			lastTime = currentTime;
-			if (delta >= 1) {
-				update();
-				repaint();
-				delta--;
+			if (gamePanel.gameRunning == true) {
+				currentTime = System.nanoTime();
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+				if (delta >= 1) {
+					update();
+					repaint();
+					delta--;
+				}
 			}
 			try {
 				Thread.sleep(10);
@@ -86,10 +88,10 @@ public class PlayerPanel extends JPanel implements Runnable {
 		if (startTime != lastTime) {
 			lastTime = startTime;
 			gamePanel.nextPiecePanel.currentPiece.drop();
-			// System.out.println("score: " + score);
-			// System.out.println("level: " + level);
 		}
 		gamePanel.nextPiecePanel.currentPiece.update();
+		gamePanel.nextPiecePanel.shadowPiece = new Piece(gamePanel.nextPiecePanel.currentPiece);
+		gamePanel.nextPiecePanel.shadowPiece.shadowUpdate();
 		startTime = System.currentTimeMillis() % 10000 / delay;
 	}
 
@@ -100,6 +102,7 @@ public class PlayerPanel extends JPanel implements Runnable {
 		g2.setRenderingHints(rh);
 		gamePanel.playerTileManager.draw(g2);
 		gamePanel.nextPiecePanel.currentPiece.draw(g2);
+		gamePanel.nextPiecePanel.shadowPiece.draw(g2);
 		g2.dispose();
 
 	}

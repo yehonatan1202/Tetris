@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -127,6 +128,17 @@ public class MainMenu extends JPanel implements ActionListener {
 		gamePanel.playerPanel.requestFocusInWindow();
 		window.pack();
 		window.setVisible(true);
+		window.addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(WindowEvent e) {
+				if (gamePanel.isSolo == false) {
+					// close client/server
+					gamePanel.clientSever.end();
+					System.exit(0);
+				}
+			}
+
+		});
 	}
 
 	@Override

@@ -43,13 +43,15 @@ public class OpponentPanel extends JPanel implements Runnable {
 		long currentTime;
 
 		while (opponentGameThread != null) {
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime) / drawInterval;
-			lastTime = currentTime;
-			if (delta >= 1) {
-				update();
-				repaint();
-				delta--;
+			if (gamePanel.gameRunning == true) {
+				currentTime = System.nanoTime();
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+				if (delta >= 1) {
+					update();
+					repaint();
+					delta--;
+				}
 			}
 			try {
 				Thread.sleep(10);
