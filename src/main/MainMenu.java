@@ -19,12 +19,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainMenu extends JPanel implements ActionListener {
+import leaderboard.LeaderboardPanel;
+
+public class MainMenu implements ActionListener {
 	JFrame window;
 
 	JButton soloButton;
 	JButton hostButton;
 	JButton joinButton;
+	JButton leaderboardButton;
 
 	public MainMenu(JFrame frame) {
 		if (frame == null) {
@@ -45,6 +48,7 @@ public class MainMenu extends JPanel implements ActionListener {
 			BufferedImage solo = ImageIO.read(new File("res/Menu/solo.png"));
 			BufferedImage host = ImageIO.read(new File("res/Menu/host.png"));
 			BufferedImage join = ImageIO.read(new File("res/Menu/join.png"));
+			BufferedImage leaderboard = ImageIO.read(new File("res/Menu/leaderboard.png"));
 
 			// label
 			JLabel backgroundLabel = new JLabel(new ImageIcon(Background));
@@ -54,16 +58,19 @@ public class MainMenu extends JPanel implements ActionListener {
 			soloButton = new JButton();
 			hostButton = new JButton();
 			joinButton = new JButton();
+			leaderboardButton = new JButton();
 
 			// set buttons images
 			soloButton.setIcon(new ImageIcon(solo));
 			hostButton.setIcon(new ImageIcon(host));
 			joinButton.setIcon(new ImageIcon(join));
+			leaderboardButton.setIcon(new ImageIcon(leaderboard));
 
 			// set buttons size
 			soloButton.setPreferredSize(new Dimension(285, 71));
 			hostButton.setPreferredSize(new Dimension(285, 71));
 			joinButton.setPreferredSize(new Dimension(285, 71));
+			leaderboardButton.setPreferredSize(new Dimension(285, 71));
 
 			// set buttons transparent and remove outline
 			soloButton.setContentAreaFilled(false);
@@ -72,6 +79,8 @@ public class MainMenu extends JPanel implements ActionListener {
 			hostButton.setBorderPainted(false);
 			joinButton.setContentAreaFilled(false);
 			joinButton.setBorderPainted(false);
+			leaderboardButton.setContentAreaFilled(false);
+			leaderboardButton.setBorderPainted(false);
 
 			// set buttons listener
 			soloButton.setActionCommand("solo");
@@ -80,6 +89,8 @@ public class MainMenu extends JPanel implements ActionListener {
 			hostButton.addActionListener(this);
 			joinButton.setActionCommand("join");
 			joinButton.addActionListener(this);
+			leaderboardButton.setActionCommand("leaderboard");
+			leaderboardButton.addActionListener(this);
 
 			panel.add(backgroundLabel);
 
@@ -87,27 +98,52 @@ public class MainMenu extends JPanel implements ActionListener {
 			GridBagConstraints gbc = new GridBagConstraints();
 
 			// space
+			gbc.gridx = 0;
 			gbc.gridy = 0;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 3;
 			backgroundLabel.add(Box.createVerticalStrut(200), gbc);
 
 			// solo button
+			gbc.gridx = 0;
 			gbc.gridy = 1;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 1;
 			backgroundLabel.add(soloButton, gbc);
 
 			// space
-			gbc.gridy = 2;
-			backgroundLabel.add(Box.createVerticalStrut(20), gbc);
+			gbc.gridx = 1;
+			gbc.gridy = 1;
+			gbc.gridheight = 3;
+			gbc.gridwidth = 1;
+			backgroundLabel.add(Box.createHorizontalStrut(15), gbc);
 
 			// host button
+			gbc.gridx = 0;
 			gbc.gridy = 3;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 1;
 			backgroundLabel.add(hostButton, gbc);
 
 			// space
-			gbc.gridy = 4;
-			backgroundLabel.add(Box.createVerticalStrut(20), gbc);
+			gbc.gridx = 0;
+			gbc.gridy = 2;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 3;
+			backgroundLabel.add(Box.createVerticalStrut(15), gbc);
+
+			// leaderboard button
+			gbc.gridx = 2;
+			gbc.gridy = 3;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 1;
+			backgroundLabel.add(leaderboardButton, gbc);
 
 			// join button
-			gbc.gridy = 5;
+			gbc.gridx = 2;
+			gbc.gridy = 1;
+			gbc.gridheight = 1;
+			gbc.gridwidth = 1;
 			backgroundLabel.add(joinButton, gbc);
 
 		} catch (IOException e) {
@@ -155,6 +191,8 @@ public class MainMenu extends JPanel implements ActionListener {
 			case "join":
 				start(2);
 				break;
+			case "leaderboard":
+				new LeaderboardPanel(window);
 
 		}
 	}

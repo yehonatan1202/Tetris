@@ -47,6 +47,13 @@ public class PlayerPanel extends JPanel implements Runnable {
 	}
 
 	public void gameOver() {
+		if(gamePanel.isSolo == true){
+			int index = gamePanel.leaderboard.addRecord(gamePanel.statsPanel.score);
+			if(index != -1){
+				System.out.println("new record");
+				gamePanel.leaderboard.setRecordName("name", index);
+			}
+		}
 		JFrame window = (JFrame) (SwingUtilities.getWindowAncestor(gamePanel));
 		MainMenu mainMenu = new MainMenu(window);
 		System.out.println("lost!");

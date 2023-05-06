@@ -6,9 +6,10 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-import file.Client;
-import file.Server;
-import file.ClientServer;
+import clientSever.Client;
+import clientSever.ClientServer;
+import clientSever.Server;
+import leaderboard.Leaderboard;
 import tile.OpponentTileManager;
 import tile.PlayerTileManager;
 
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel {
 	public OpponentTileManager opponentTileManager;
 	public KeyHandler keyHandler;
 	public ClientServer clientSever;
+	public Leaderboard leaderboard;
 
 	public void resumeGame() {
 		playerPanel.startGameThread();
@@ -68,6 +70,8 @@ public class GamePanel extends JPanel {
 		this.keyHandler = new KeyHandler();
 		playerPanel.addKeyListener(keyHandler);
 
+		leaderboard = new Leaderboard();
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;

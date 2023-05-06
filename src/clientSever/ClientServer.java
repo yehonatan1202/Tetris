@@ -1,4 +1,4 @@
-package file;
+package clientSever;
 
 public interface ClientServer {
     public void startThread();
