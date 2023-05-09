@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -47,17 +48,39 @@ public class PlayerPanel extends JPanel implements Runnable {
 	}
 
 	public void gameOver() {
-		if(gamePanel.isSolo == true){
+		System.out.println("Game Over!");
+		if (gamePanel.isSolo == true) {
 			int index = gamePanel.leaderboard.addRecord(gamePanel.statsPanel.score);
-			if(index != -1){
-				System.out.println("new record");
-				gamePanel.leaderboard.setRecordName("name", index);
+			if (index != -1) {
+				System.out.println("new record: " + gamePanel.statsPanel.score + "pt");
+				String name = JOptionPane.showInputDialog(gamePanel, "What is your name?", "New Record: " + gamePanel.statsPanel.score + "pt", JOptionPane.INFORMATION_MESSAGE);
+				if (name == null || name.isEmpty()) {
+					name = "Player";
+				} else {
+					name = name.replaceAll(" ", "_");
+				}
+				gamePanel.leaderboard.setRecordName(name, index);
 			}
+			gameThread = null;
+			gamePanel.nextPiecePanel.nextPieceThread = null;
+		} else {
+			gameThread = null;
+			gamePanel.nextPiecePanel.nextPieceThread = null;
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (gamePanel.lost == true) {
+				JOptionPane.showMessageDialog(gamePanel, "You Lost!", "", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(gamePanel, "You Won!", "", JOptionPane.INFORMATION_MESSAGE);
+			}
+			gamePanel.lost = false;
+			gamePanel.clientSever.end();
 		}
 		JFrame window = (JFrame) (SwingUtilities.getWindowAncestor(gamePanel));
 		MainMenu mainMenu = new MainMenu(window);
-		System.out.println("lost!");
-		gameThread = null;
 	}
 
 	public void startGameThread() {

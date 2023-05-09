@@ -6,8 +6,6 @@ import main.GamePanel;
 import main.PlayerPanel;
 
 public class PlayerTileManager extends TileManager {
-	// GamePanel gamePanel;
-	// public static Tile[] tile;
 	public int playerTilesMap[][];
 	public PlayerPanel playerPanel;
 

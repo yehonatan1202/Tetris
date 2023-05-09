@@ -3,8 +3,8 @@ package tile;
 import main.GamePanel;
 
 public class TileManager {
-	GamePanel gamePanel;
 	public static Tile[] tile;
+	GamePanel gamePanel;
 
 	public TileManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -12,13 +12,7 @@ public class TileManager {
 		getTileImage();
 	}
 
-	// public void startTileManagerThread() {
-	// mapThread = new Thread(this);
-	// mapThread.start();
-	// }
-
 	public void getTileImage() {
-			// black
 			for(int i = 0; i < 9; i++){
 				tile[i] = new Tile(String.format("res/tiles/tile_%d.png", i));
 			}

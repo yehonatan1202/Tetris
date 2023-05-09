@@ -6,9 +6,10 @@ import main.GamePanel;
 import main.Piece;
 
 public class Data implements Serializable {
-	transient GamePanel gamePanel;
 	public int playerTilesMap[][];
 	public boolean running;
+	public boolean lost;
+	transient GamePanel gamePanel;
 
 	public Data(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -17,6 +18,7 @@ public class Data implements Serializable {
 
 	public void upload() {
 		this.running = gamePanel.myRunning;
+		this.lost = gamePanel.lost;
 		for (int i = 0; i < gamePanel.playerPanel.ScreenRow; i++) {
 			for (int j = 0; j < gamePanel.playerPanel.ScreenCol; j++) {
 				playerTilesMap[i][j] = gamePanel.playerTileManager.playerTilesMap[i][j];
@@ -33,8 +35,6 @@ public class Data implements Serializable {
 	}
 
 	public void download(GamePanel gamePanel) {
-		// move to a diffrent place should run even when the player/nextPiece thread
-		// stopes
 		if (gamePanel.keyHandler.escPressed == true) {
 			gamePanel.myRunning = !gamePanel.myRunning;
 			gamePanel.keyHandler.escPressed = false;
@@ -46,7 +46,6 @@ public class Data implements Serializable {
 				gamePanel.gameRunning = false;
 			} else if (running == true && gamePanel.myRunning == true) {
 				gamePanel.gameRunning = true;
-				// gamePanel.resumeGame();
 			}
 		}
 		for (int i = 0; i < gamePanel.playerPanel.ScreenRow; i++) {
@@ -54,6 +53,8 @@ public class Data implements Serializable {
 				gamePanel.opponentTileManager.opponentTilesMap[i][j] = playerTilesMap[i][j];
 			}
 		}
-		// gamePanel.opponenetPanel.currentPiece = playerCurrentPiece;
+		if(lost == true){
+			gamePanel.playerPanel.gameOver();
+		}
 	}
 }

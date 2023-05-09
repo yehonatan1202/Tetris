@@ -48,7 +48,6 @@ public class OpponentPanel extends JPanel implements Runnable {
 				delta += (currentTime - lastTime) / drawInterval;
 				lastTime = currentTime;
 				if (delta >= 1) {
-					update();
 					repaint();
 					delta--;
 				}
@@ -60,10 +59,6 @@ public class OpponentPanel extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public void update() {
-
 	}
 
 	public void paintComponent(Graphics g) {

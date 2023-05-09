@@ -4,16 +4,93 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
-
 import tile.TileManager;
 
 public class Piece implements Serializable {
-	transient GamePanel gamePanel;
 	public int posX, posY;
 	public int[][] shape;
 	public int tile;
-	int time = 0;
+
+	transient GamePanel gamePanel;
+
+	public Piece(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		this.gamePanel.playerTileManager.check();
+		posY = 0;
+		posX = gamePanel.playerPanel.ScreenCol / 2 - 2;
+		Random rand = new Random();
+		shape = new int[4][4];
+		int rnd = rand.nextInt(7);
+		switch (rnd) {
+			case 0:
+				tile = 1;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 1, 1, 1, 1 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 } };
+
+				break;
+
+			case 1:
+				tile = 2;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 0, 1, 1, 0 },
+						{ 0, 1, 1, 0 },
+						{ 0, 0, 0, 0 } };
+				break;
+
+			case 2:
+				tile = 3;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 1, 0, 0, 0 },
+						{ 1, 1, 1, 0 },
+						{ 0, 0, 0, 0 } };
+				break;
+
+			case 3:
+				tile = 4;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 1 },
+						{ 0, 1, 1, 1 },
+						{ 0, 0, 0, 0 } };
+				break;
+
+			case 4:
+				tile = 5;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 0, 1, 0, 0 },
+						{ 1, 1, 1, 0 },
+						{ 0, 0, 0, 0 } };
+				break;
+
+			case 5:
+				tile = 6;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 1, 1 },
+						{ 0, 1, 1, 0 },
+						{ 0, 0, 0, 0 } };
+				break;
+
+			case 6:
+				tile = 7;
+				shape = new int[][] {
+						{ 0, 0, 0, 0 },
+						{ 1, 1, 0, 0 },
+						{ 0, 1, 1, 0 },
+						{ 0, 0, 0, 0 } };
+				break;
+		}
+		if (checkLost() == true) {
+			gamePanel.lost = true;
+			this.gamePanel.playerPanel.gameOver();
+		}
+	}
 
 	public Piece(Piece piece) {
 		this.gamePanel = piece.gamePanel;
@@ -26,196 +103,6 @@ public class Piece implements Serializable {
 			}
 		}
 		this.tile = piece.tile + 9;
-		this.time = piece.time;
-	}
-
-	public Piece(GamePanel gamePanel) {
-		this.gamePanel = gamePanel;
-		this.gamePanel.playerTileManager.check();
-		posY = 0;
-		posX = gamePanel.playerPanel.ScreenCol / 2 - 2;
-		Random rand = new Random();
-		shape = new int[4][4];
-		int rnd = rand.nextInt(7);
-		switch (rnd) {
-			// 0 0 0 0
-			// 1 1 1 1
-			// 0 0 0 0
-			// 0 0 0 0
-			case 0:
-				tile = 1;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 1;
-				shape[1][1] = 1;
-				shape[1][2] = 1;
-				shape[1][3] = 1;
-
-				shape[2][0] = 0;
-				shape[2][1] = 0;
-				shape[2][2] = 0;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			// 0 0 0 0
-			// 0 1 1 0
-			// 0 1 1 0
-			// 0 0 0 0
-			case 1:
-				tile = 2;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 0;
-				shape[1][1] = 1;
-				shape[1][2] = 1;
-				shape[1][3] = 0;
-
-				shape[2][0] = 0;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			// 0 0 0 0
-			// 1 0 0 0
-			// 1 1 1 0
-			// 0 0 0 0
-			case 2:
-				tile = 3;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 1;
-				shape[1][1] = 0;
-				shape[1][2] = 0;
-				shape[1][3] = 0;
-
-				shape[2][0] = 1;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			// 0 0 0 0
-			// 0 0 0 1
-			// 0 1 1 1
-			// 0 0 0 0
-			case 3:
-				tile = 4;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 0;
-				shape[1][1] = 0;
-				shape[1][2] = 0;
-				shape[1][3] = 1;
-
-				shape[2][0] = 0;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 1;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			// 0 0 0 0
-			// 0 1 0 0
-			// 1 1 1 0
-			// 0 0 0 0
-			case 4:
-				tile = 5;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 0;
-				shape[1][1] = 1;
-				shape[1][2] = 0;
-				shape[1][3] = 0;
-
-				shape[2][0] = 1;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			case 5:
-				tile = 6;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 0;
-				shape[1][1] = 0;
-				shape[1][2] = 1;
-				shape[1][3] = 1;
-
-				shape[2][0] = 0;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-			case 6:
-				tile = 7;
-				shape[0][0] = 0;
-				shape[0][1] = 0;
-				shape[0][2] = 0;
-				shape[0][3] = 0;
-
-				shape[1][0] = 1;
-				shape[1][1] = 1;
-				shape[1][2] = 0;
-				shape[1][3] = 0;
-
-				shape[2][0] = 0;
-				shape[2][1] = 1;
-				shape[2][2] = 1;
-				shape[2][3] = 0;
-
-				shape[3][0] = 0;
-				shape[3][1] = 0;
-				shape[3][2] = 0;
-				shape[3][3] = 0;
-				break;
-		}
-		if (checkLost() == true) {
-			this.gamePanel.playerPanel.gameOver();
-		}
 	}
 
 	void rotateClockwise() {
@@ -311,7 +198,6 @@ public class Piece implements Serializable {
 				gamePanel.playerPanel.newPiece();
 			}
 			gamePanel.keyHandler.downPressed = false;
-			// gamePanel.statsPanel.score++;
 		}
 
 		if (gamePanel.keyHandler.rightPressed == true) {
@@ -352,7 +238,8 @@ public class Piece implements Serializable {
 				if (shape[i][j] != 0) {
 					int screenX = (j + posX) * gamePanel.tileSize;
 					int screenY = (i + posY) * gamePanel.tileSize;
-					g2.drawImage(TileManager.tile[tile].image.getImage(), screenX, screenY, gamePanel.tileSize, gamePanel.tileSize,
+					g2.drawImage(TileManager.tile[tile].image.getImage(), screenX, screenY, gamePanel.tileSize,
+							gamePanel.tileSize,
 							null);
 				}
 			}

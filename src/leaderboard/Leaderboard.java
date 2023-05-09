@@ -2,18 +2,15 @@ package leaderboard;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 
 public class Leaderboard {
-    Record recordList[];
     int listSize = 5;
+    Record recordList[];
     String path = "src/leaderboard/leaderboard";
 
     public Leaderboard(){
@@ -47,7 +44,6 @@ public class Leaderboard {
             BufferedWriter bw = new BufferedWriter(new FileWriter(path));
             for(int i = 0; i < listSize; i++){
                 bw.write(recordList[i].name + " " + recordList[i].score + " " + recordList[i].date + "\n");
-                System.out.println(recordList[i].name + " " + recordList[i].score + " " + recordList[i].date + "\n");
             }
             bw.close();
         } catch (IOException e) {

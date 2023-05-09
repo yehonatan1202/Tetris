@@ -11,12 +11,17 @@ import java.net.Socket;
 import main.GamePanel;
 
 public class Server implements Runnable, ClientServer {
-    GamePanel gamePanel;
     Data data;
     ServerSocket ss;
     Socket socket;
     Thread serverThread;
-
+    GamePanel gamePanel;
+    
+    public Server(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+        data = new Data(gamePanel);
+    }
+    
     public void startThread() {
         serverThread = new Thread(this);
         serverThread.start();
@@ -35,10 +40,6 @@ public class Server implements Runnable, ClientServer {
         }
     }
 
-    public Server(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        data = new Data(gamePanel);
-    }
 
     public void connect() {
         try {
@@ -63,14 +64,10 @@ public class Server implements Runnable, ClientServer {
                 recivedData = (Data) (objectInputStream.readObject());
                 recivedData.download(gamePanel);
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
                 end();
             }
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
             end();
         }
     }
@@ -86,8 +83,6 @@ public class Server implements Runnable, ClientServer {
             data.upload();
             objectOutputStream.writeObject(data);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 

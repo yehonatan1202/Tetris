@@ -25,6 +25,7 @@ public class GamePanel extends JPanel {
 	public boolean isSolo = false;
 	public boolean myRunning = true;
 	public boolean gameRunning = true;
+	public boolean lost = false;
 
 	public PlayerPanel playerPanel;
 	public StatsPanel statsPanel;
@@ -36,30 +37,30 @@ public class GamePanel extends JPanel {
 	public ClientServer clientSever;
 	public Leaderboard leaderboard;
 
+	public GamePanel(int mode) {
+		switch (mode) {
+			case 0:
+			isSolo = true;
+			solo();
+			break;
+			
+			case 1:
+			server();
+			break;
+			
+			case 2:
+			client();
+			break;
+		}
+	}
+	
 	public void resumeGame() {
 		playerPanel.startGameThread();
 		nextPiecePanel.startGameThread();
 		statsPanel.startGameThread();
 	}
 
-	public GamePanel(int mode) {
-		switch (mode) {
-			case 0:
-				isSolo = true;
-				solo();
-				break;
-
-			case 1:
-				server();
-				break;
-
-			case 2:
-				client();
-				break;
-		}
-	}
-
-	void solo() {
+	private void solo() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		statsPanel = new StatsPanel(this);
 		this.playerPanel = new PlayerPanel(this);
@@ -93,7 +94,7 @@ public class GamePanel extends JPanel {
 		resumeGame();
 	}
 
-	void server() {
+	private void server() {
 		clientSever = new Server(this);
 		clientSever.connect();
 
@@ -142,7 +143,7 @@ public class GamePanel extends JPanel {
 		statsPanel.startGameThread();
 	}
 
-	void client() {
+	private void client() {
 		clientSever = new Client(this);
 		clientSever.connect();
 

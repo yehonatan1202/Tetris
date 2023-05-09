@@ -19,15 +19,16 @@ public class NextPiecePanel extends JPanel implements Runnable {
 	public int screenWidth = tileSize * ScreenCol;
 	public int screenHeight = tileSize * ScreenRow;
 
-	GamePanel gamePanel;
 	public Piece currentPiece;
 	public Piece shadowPiece;
 	Piece nextPiece;
-
+	
 	int FPS = 60;
-
+	
 	Thread nextPieceThread;
-
+	
+	GamePanel gamePanel;
+	
 	public NextPiecePanel(GamePanel gamePanel) {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.BLACK);
@@ -55,7 +56,6 @@ public class NextPiecePanel extends JPanel implements Runnable {
 				delta += (currentTime - lastTime) / drawInterval;
 				lastTime = currentTime;
 				if (delta >= 1) {
-					// update();
 					repaint();
 					delta--;
 				}

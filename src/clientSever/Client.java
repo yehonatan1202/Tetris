@@ -11,11 +11,16 @@ import java.net.UnknownHostException;
 import main.GamePanel;
 
 public class Client implements Runnable, ClientServer {
-    GamePanel gamePanel;
     Data data;
     Socket socket;
     Thread clientThread;
+    GamePanel gamePanel;
 
+    public Client(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+        data = new Data(gamePanel);
+    }
+    
     public void startThread() {
         clientThread = new Thread(this);
         clientThread.start();
@@ -32,11 +37,6 @@ public class Client implements Runnable, ClientServer {
             }
             send();
         }
-    }
-
-    public Client(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        data = new Data(gamePanel);
     }
 
     public void connect() {
@@ -63,14 +63,10 @@ public class Client implements Runnable, ClientServer {
                 recivedData = (Data) (objectInputStream.readObject());
                 recivedData.download(gamePanel);
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
                 end();
-                e.printStackTrace();
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             end();
-            e.printStackTrace();
         }
     }
 
@@ -84,8 +80,6 @@ public class Client implements Runnable, ClientServer {
             data.upload();
             objectOutputStream.writeObject(data);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
