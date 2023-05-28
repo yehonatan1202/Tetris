@@ -191,44 +191,49 @@ public class Piece implements Serializable {
 	}
 
 	void update() {
-		if (gamePanel.keyHandler.downPressed == true) {
-			posY++;
-			if (downCollision() == true) {
-				updateMap();
-				gamePanel.playerPanel.newPiece();
-			}
-			gamePanel.keyHandler.downPressed = false;
-		}
-
-		if (gamePanel.keyHandler.rightPressed == true) {
-			posX++;
-			if (edgeCollision() == true) {
-				posX--;
-			}
-			gamePanel.keyHandler.rightPressed = false;
-		}
-		if (gamePanel.keyHandler.leftPressed == true) {
-			posX--;
-			if (edgeCollision() == true) {
-				posX++;
-			}
-			gamePanel.keyHandler.leftPressed = false;
-		}
-		if (gamePanel.keyHandler.upPressed == true) {
-			gamePanel.keyHandler.upPressed = false;
-			rotateClockwise();
-			if (edgeCollision() == true || downCollision() == true) {
-				rotateCounterlockwise();
-			}
-		}
-		if (gamePanel.keyHandler.spacePressed == true) {
-			while (downCollision() == false) {
+		boolean newPiece = false;
+		synchronized (ThreadsLock.INSTANCE){
+			if (gamePanel.keyHandler.downPressed == true) {
+				gamePanel.keyHandler.downPressed = false;
 				posY++;
-				gamePanel.statsPanel.score++;
+				if (downCollision() == true) {
+					updateMap();
+					newPiece = true;
+				}
 			}
-			updateMap();
+			if (gamePanel.keyHandler.rightPressed == true) {
+				gamePanel.keyHandler.rightPressed = false;
+				posX++;
+				if (edgeCollision() == true) {
+					posX--;
+				}
+			}
+			if (gamePanel.keyHandler.leftPressed == true) {
+				gamePanel.keyHandler.leftPressed = false;
+				posX--;
+				if (edgeCollision() == true) {
+					posX++;
+				}
+			}
+			if (gamePanel.keyHandler.upPressed == true) {
+				gamePanel.keyHandler.upPressed = false;
+				rotateClockwise();
+				if (edgeCollision() == true || downCollision() == true) {
+					rotateCounterlockwise();
+				}
+			}
+			if (gamePanel.keyHandler.spacePressed == true) {
+				gamePanel.keyHandler.spacePressed = false;
+				while (downCollision() == false) {
+					posY++;
+					gamePanel.statsPanel.score++;
+				}
+				updateMap();
+				newPiece = true;
+			}
+		}
+		if(newPiece == true){
 			gamePanel.playerPanel.newPiece();
-			gamePanel.keyHandler.spacePressed = false;
 		}
 	}
 

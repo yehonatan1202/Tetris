@@ -28,7 +28,8 @@ public class PlayerPanel extends JPanel implements Runnable {
 	long startTime;
 	long lastTime;
 	GamePanel gamePanel;
-	// Piece currentPiece;
+
+	public int sendRows = 0;
 
 	public PlayerPanel(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -53,7 +54,8 @@ public class PlayerPanel extends JPanel implements Runnable {
 			int index = gamePanel.leaderboard.addRecord(gamePanel.statsPanel.score);
 			if (index != -1) {
 				System.out.println("new record: " + gamePanel.statsPanel.score + "pt");
-				String name = JOptionPane.showInputDialog(gamePanel, "What is your name?", "New Record: " + gamePanel.statsPanel.score + "pt", JOptionPane.INFORMATION_MESSAGE);
+				String name = JOptionPane.showInputDialog(gamePanel, "What is your name?",
+						"New Record: " + gamePanel.statsPanel.score + "pt", JOptionPane.INFORMATION_MESSAGE);
 				if (name == null || name.isEmpty()) {
 					name = "Player";
 				} else {
@@ -66,15 +68,15 @@ public class PlayerPanel extends JPanel implements Runnable {
 		} else {
 			gameThread = null;
 			gamePanel.nextPiecePanel.nextPieceThread = null;
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			if (gamePanel.lost == true) {
 				JOptionPane.showMessageDialog(gamePanel, "You Lost!", "", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(gamePanel, "You Won!", "", JOptionPane.INFORMATION_MESSAGE);
+			}
+			try {
+				Thread.sleep(250);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 			gamePanel.lost = false;
 			gamePanel.clientSever.end();

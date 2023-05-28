@@ -16,12 +16,12 @@ public class Server implements Runnable, ClientServer {
     Socket socket;
     Thread serverThread;
     GamePanel gamePanel;
-    
+
     public Server(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         data = new Data(gamePanel);
     }
-    
+
     public void startThread() {
         serverThread = new Thread(this);
         serverThread.start();
@@ -39,7 +39,6 @@ public class Server implements Runnable, ClientServer {
             recive();
         }
     }
-
 
     public void connect() {
         try {
@@ -88,11 +87,15 @@ public class Server implements Runnable, ClientServer {
 
     public void end() {
         try {
+            gamePanel.lost = true;
+            send();
+            gamePanel.lost = false;
+            Thread.sleep(50);
             System.out.println("Closing sockets.");
             ss.close();
             socket.close();
             serverThread = null;
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

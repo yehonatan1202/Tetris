@@ -20,7 +20,7 @@ public class Client implements Runnable, ClientServer {
         this.gamePanel = gamePanel;
         data = new Data(gamePanel);
     }
-    
+
     public void startThread() {
         clientThread = new Thread(this);
         clientThread.start();
@@ -85,10 +85,14 @@ public class Client implements Runnable, ClientServer {
 
     public void end() {
         try {
+            gamePanel.lost = true;
+            send();
+            gamePanel.lost = false;
+            Thread.sleep(50);
             System.out.println("Closing socket and terminating program.");
             socket.close();
             clientThread = null;
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

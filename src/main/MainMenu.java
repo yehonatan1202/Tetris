@@ -155,7 +155,6 @@ public class MainMenu implements ActionListener {
 	}
 
 	public void start(int mode) {
-		// window = new JFrame();
 		window.getContentPane().removeAll();
 		window.setTitle("Tetris" + mode);
 		GamePanel gamePanel = new GamePanel(mode);
